@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  changelog-api-db:
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  changelog-api-web:
+    depends_on:
+    - changelog-api-db
+    build: .
+    env_file: ./.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/src
+    command: python manage.py runserver 0.0.0.0:8000
+
+volumes:
+  db-data:
+  static-volume:

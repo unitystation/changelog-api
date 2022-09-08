@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:14.1-alpine
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  web:
+    image: unitystation/changelog-api:latest
+    environment:
+      - DEBUG=0
+    env_file: ./.env
+    expose:
+      - 8000
+    command: gunicorn changelog_api.wsgi:application --bind 0.0.0.0:8000
+
+volumes:
+  db-data:
