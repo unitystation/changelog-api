@@ -69,8 +69,17 @@ class GetWhatsNewView(ListAPIView):
     pagination_class = None
 
     def get_queryset(self):
-        latest_build = BuildVersion.objects.last()
-        return Change.objects.filter(build=latest_build)
+        return Change.objects.filter(build=self.get_latest_build())
+
+    def get_latest_build(self) -> BuildVersion | None:
+        return BuildVersion.objects.last()
+
+    def get(self, request, *args, **kwargs):
+        data = {
+            "build": self.get_latest_build().version_number if self.get_latest_build() else None,
+            "changes": self.list(request, *args, **kwargs).data,
+        }
+        return Response(data)
 
 
 class GetAliveView(GenericAPIView):
