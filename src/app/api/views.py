@@ -69,7 +69,7 @@ class GetWhatsNewView(ListAPIView):
     pagination_class = None
 
     def get_queryset(self):
-        latest_build = BuildVersion.objects.latest('date_created')
+        latest_build = BuildVersion.objects.last()
         return Change.objects.filter(build=latest_build)
 
 

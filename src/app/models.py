@@ -1,6 +1,9 @@
 from django.db import models
 
 class BuildVersion(models.Model):
+    class Meta:
+        ordering = ['version_number']
+
     version_number = models.TextField(
         max_length=50,
         primary_key=True,
@@ -20,6 +23,9 @@ class ChangeCategory(models.TextChoices):
 
 
 class Change(models.Model):
+    class Meta:
+        ordering = ['date_added']
+
     author_username = models.TextField(
         max_length=50,
         verbose_name="Author's Username",
