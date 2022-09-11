@@ -7,7 +7,7 @@ from .serializers import (
 )
 from ..models import Change, BuildVersion
 from ..versioner import add_version_to_unversioned_changes
-
+from ..versioner import get_latest_version
 
 
 class PostBuildVersionView(GenericAPIView):
@@ -69,14 +69,11 @@ class GetWhatsNewView(ListAPIView):
     pagination_class = None
 
     def get_queryset(self):
-        return Change.objects.filter(build=self.get_latest_build())
-
-    def get_latest_build(self) -> BuildVersion | None:
-        return BuildVersion.objects.last()
+        return Change.objects.filter(build=get_latest_version())
 
     def get(self, request, *args, **kwargs):
         data = {
-            "build": self.get_latest_build().version_number if self.get_latest_build() else None,
+            "build": get_latest_version().version_number if get_latest_version() else None,
             "changes": self.list(request, *args, **kwargs).data,
         }
         return Response(data)
