@@ -26,11 +26,11 @@ SECRET_KEY = environ.get('SECRET_KEY', 'foobar')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = environ.get('DEBUG', 'True').upper() == 'TRUE'
 
-ALLOWED_HOSTS = ['*'] if DEBUG else ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 # CSRF
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 CSRF_TRUSTED_ORIGINS = ['https://changelog.unitystation.org/', 'http://localhost:8000/']
-
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -48,8 +48,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
