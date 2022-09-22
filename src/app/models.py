@@ -2,7 +2,7 @@ from django.db import models
 
 class BuildVersion(models.Model):
     class Meta:
-        ordering = ['version_number']
+        ordering = ['-version_number']
 
     version_number = models.TextField(
         max_length=50,

@@ -63,3 +63,9 @@ class GetBuildSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildVersion
         fields = ('version_number', 'date_created')
+
+class GetAllChangesSerializer(serializers.ModelSerializer):
+    changes = GetChangeSerializer(many=True, read_only=True)
+    class Meta:
+        model = BuildVersion
+        fields = ('version_number', 'date_created', 'changes')

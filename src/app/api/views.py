@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from .serializers import (
     PostBuildVersionSerializer, PostChangeSerializer,
     GetChangeSerializer, PostChangeWithBuildSerialiazer,
-    GetBuildSerializer
+    GetBuildSerializer,
+    GetAllChangesSerializer
 )
 from ..models import Change, BuildVersion
 from ..versioner import add_version_to_unversioned_changes
@@ -54,8 +55,8 @@ class GetChangesByVersionView(ListAPIView):
 
 
 class GetAllChangesView(ListAPIView):
-    serializer_class = GetChangeSerializer
-    queryset = Change.objects.all().exclude(build=None)
+    serializer_class = GetAllChangesSerializer
+    queryset = BuildVersion.objects.all()
 
 
 class GetAllBuildsView(ListAPIView):
