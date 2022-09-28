@@ -9,8 +9,10 @@ def add_version_to_unversioned_changes():
         change.date_added = latest_build.date_created
         change.save()
 
+
 def get_latest_version() -> BuildVersion | None:
-    return BuildVersion.objects.last()
+    return BuildVersion.objects.first()
+
 
 def get_unversioned_changes() -> list[Change]:
     return Change.objects.filter(build=None)
