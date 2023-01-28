@@ -13,9 +13,14 @@ services:
     environment:
       - DEBUG=0
     env_file: ./.env
+    volumes:
+      - media-volume:/home/media
+      - static-volume:/home/static
     expose:
       - 8000
     command: gunicorn changelog_api.wsgi:application --bind 0.0.0.0:8000
 
 volumes:
   db-data:
+  media-volume:
+  static-volume:

@@ -86,6 +86,18 @@ Django = ">=2.2"
 tests = ["coverage"]
 
 [[package]]
+name = "django-light"
+version = "0.1.0.post3"
+description = "Disable dark mode in Django admin UI."
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-light-0.1.0.post3.tar.gz", hash = "sha256:74e7fc67c4aaaae304cb34529b5bb9e46b78ce6c87381c5edc00b7f4f84a422e"},
+    {file = "django_light-0.1.0.post3-py3-none-any.whl", hash = "sha256:921a09124f2a8db0c0ea3a8f06dede5782180b0398f901bc595305db7b622a90"},
+]
+
+[[package]]
 name = "djangorestframework"
 version = "3.14.0"
 description = "Web APIs for Django, made easy."
@@ -289,4 +301,4 @@ brotli = ["Brotli"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "99d0b11f82c357ca21374bf97d759c6c7760e50ee305791edafe0667438d6fc4"
+content-hash = "a24c2a7a839853d97f5a488a347eda1307b7e48ec663db9aac08289c7298e0da"
