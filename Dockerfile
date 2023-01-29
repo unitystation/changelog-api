@@ -30,8 +30,8 @@ RUN apk add --no-cache libpq \
 
 COPY src .
 
-RUN mkdir /home/website/staticfiles
-RUN mkdir /home/website/media
+RUN mkdir -p /home/website/staticfiles
+RUN mkdir -p /home/website/media
 
 # I'm too dumb to make user permissions over shared volumes work
 #RUN addgroup -S unitystation \
