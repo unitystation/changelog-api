@@ -9,7 +9,7 @@ from ..models import Post
 
 class AllPostsView(ListAPIView):
     serializer_class = PostSerializer
-    queryset = Post.objects.all()
+    queryset = Post.objects.filter(state='published').order_by('-date_created')
     pagination_class = PageNumberPagination
 
 class PostDetailView(GenericAPIView):
