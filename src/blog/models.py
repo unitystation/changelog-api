@@ -37,6 +37,6 @@ class Post(models.Model):
         return reverse('blog:post_detail', args=[self.date_created.year, self.date_created.strftime('%m'), self.date_created.strftime('%d'), self.slug])
 
 class Section(models.Model):
-    heading = models.CharField(max_length=200, help_text='Enter a heading for this section. This will displayed as an H2.')
+    heading = models.CharField(max_length=200, help_text='Enter a heading for this section. This will displayed as an H2.', blank=True, null=True)
     body = CKEditor5Field(help_text='Enter the body of this section')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='sections')
