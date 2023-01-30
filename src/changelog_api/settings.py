@@ -181,7 +181,7 @@ CKEDITOR_5_CONFIGS = {
                     'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'mediaEmbed', 'removeFormat',
                     'insertTable', 'horizontalLine'],
         'image': {
-            'toolbar': ['imageTextAlternative', '|', 'imageStyle:alignLeft',
+            'toolbar': ['ImageCaption', 'imageTextAlternative', '|', 'imageStyle:alignLeft',
                         'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
             'styles': [
                 'full',
@@ -218,6 +218,15 @@ CKEDITOR_5_CONFIGS = {
             'startIndex': 'true',
             'reversed': 'true',
         }
+    },
+    'htmlSupport': {
+        'allow': [
+            {
+                'name': '.*',
+                'attributes': 'true',
+                'classes': 'true',
+                'styles': 'true',
+            }],
     }
 }
 
