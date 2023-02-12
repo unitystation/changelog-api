@@ -13,8 +13,8 @@ whitenoise = "^6.2.0"
 psycopg2-binary = "^2.9.3"
 gunicorn = "^20.1.0"
 django-cors-headers = "^3.13.0"
+pillow = "^9.4.0"
 django-light = "^0.1.0.post3"
-django-ckeditor-5 = "^0.2.3"
 
 [tool.poetry.dev-dependencies]
 
