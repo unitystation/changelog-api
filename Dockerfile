@@ -13,7 +13,8 @@ WORKDIR /src
 
 COPY poetry.lock pyproject.toml ./
 
-RUN apk add --no-cache libpq \
+RUN apk update && \
+    apk add --no-cache libpq npm \
     && apk add --no-cache --virtual .build-deps \
     # https://cryptography.io/en/latest/installation/#alpine
     gcc \
@@ -29,17 +30,12 @@ RUN apk add --no-cache libpq \
     && apk del --purge .build-deps
 
 COPY src .
+RUN cd django_ckeditor_5/ && \
+    npm install && \
+    npm run prod
 
 RUN mkdir -p /home/website/staticfiles
 RUN mkdir -p /home/website/media
-
-# I'm too dumb to make user permissions over shared volumes work
-#RUN addgroup -S unitystation \
-#    && adduser -S central_command -G unitystation \
-#    && chown -R central_command:unitystation /src \
-#    && chown -R central_command:unitystation $home
-#
-#USER central_command
 
 RUN sed -i 's/\r$//g' entrypoint.sh
 RUN chmod +x entrypoint.sh

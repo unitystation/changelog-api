@@ -182,7 +182,7 @@ CKEDITOR_5_CONFIGS = {
                     'insertTable', 'horizontalLine'],
         'image': {
             'toolbar': ['ImageCaption', 'imageTextAlternative', '|', 'imageStyle:alignLeft',
-                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|'],
+                        'imageStyle:alignRight', 'imageStyle:alignCenter', 'imageStyle:side',  '|', 'linkImage'],
             'styles': [
                 'full',
                 'side',
