@@ -52,3 +52,6 @@ class Section(models.Model):
     heading = models.CharField(max_length=200, help_text='Enter a heading for this section. This will displayed as an H2.', blank=True, null=True)
     body = CKEditor5Field(help_text='Enter the body of this section')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='sections')
+
+    class Meta:
+        ordering = ('pk',)
