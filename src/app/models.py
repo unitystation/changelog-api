@@ -10,6 +10,7 @@ class BuildVersion(models.Model):
         help_text="The version number of the build. Must be unique.")
 
     date_created = models.DateField()
+    is_stable = models.BooleanField(default=False)
 
     def __str__(self):
         return f"Build Version {self.version_number} created on {self.date_created}"

@@ -3,7 +3,7 @@ from .models import BuildVersion, Change
 
 @admin.register(BuildVersion)
 class BuildVersionAdmin(admin.ModelAdmin):
-    list_display = ('version_number', 'date_created')
+    list_display = ('version_number', 'date_created', 'is_stable')
 
 
 @admin.register(Change)
