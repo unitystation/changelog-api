@@ -16,3 +16,7 @@ def get_latest_version() -> BuildVersion | None:
 
 def get_unversioned_changes() -> list[Change]:
     return Change.objects.filter(build=None)
+
+
+def get_latest_stable_version() -> BuildVersion | None:
+    return BuildVersion.objects.filter(is_stable=True).first()

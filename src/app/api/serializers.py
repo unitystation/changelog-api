@@ -52,6 +52,22 @@ class PostChangeWithBuildSerialiazer(serializers.ModelSerializer):
         validated_data.pop('secret_token')
         return super().create(validated_data)
 
+class UpdateBuildAsStableSerializer(serializers.ModelSerializer):
+    secret_token = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = BuildVersion
+        fields = ('version_number', 'secret_token')
+
+    def validate_secret_token(self, value: str) -> str:
+        return validate_secret_token(value)
+
+    def update(self, instance, validated_data):
+        validated_data.pop('secret_token')
+        instance.is_stable = True
+        return super().update(instance, validated_data)
+
+
 
 class GetChangeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -62,7 +78,8 @@ class GetChangeSerializer(serializers.ModelSerializer):
 class GetBuildSerializer(serializers.ModelSerializer):
     class Meta:
         model = BuildVersion
-        fields = ('version_number', 'date_created')
+        fields = ('version_number', 'date_created', 'is_stable')
+
 
 class GetAllChangesSerializer(serializers.ModelSerializer):
     changes = GetChangeSerializer(many=True, read_only=True)

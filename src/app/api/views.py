@@ -4,7 +4,8 @@ from .serializers import (
     PostBuildVersionSerializer, PostChangeSerializer,
     GetChangeSerializer, PostChangeWithBuildSerialiazer,
     GetBuildSerializer,
-    GetAllChangesSerializer
+    GetAllChangesSerializer,
+    UpdateBuildAsStableSerializer,
 )
 from ..models import Change, BuildVersion
 from ..versioner import add_version_to_unversioned_changes
@@ -44,6 +45,16 @@ class PostVersionedChangeView(GenericAPIView):
 
         return Response(serializer.data)
 
+class UpdateBuildAsStableView(GenericAPIView):
+    serializer_class = UpdateBuildAsStableSerializer
+
+    def put(self, request):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(serializer.data)
+
 
 class GetChangesByVersionView(ListAPIView):
     serializer_class = GetChangeSerializer
@@ -62,7 +73,21 @@ class GetAllChangesView(ListAPIView):
 class GetAllBuildsView(ListAPIView):
     serializer_class = GetBuildSerializer
     queryset = BuildVersion.objects.all()
-    pagination_class = None
+
+
+class GetStableBuildsView(ListAPIView):
+    serializer_class = GetBuildSerializer
+    queryset = BuildVersion.objects.filter(stable=True)
+
+
+class GetLatestStableBuildView(ListAPIView):
+    serializer_class = GetBuildSerializer
+    queryset = BuildVersion.objects.filter(stable=True).first()
+
+
+class GetLatestStagingBuildView(ListAPIView):
+    serializer_class = GetBuildSerializer
+    queryset = BuildVersion.objects.filter().first()
 
 
 class GetWhatsNewView(ListAPIView):
