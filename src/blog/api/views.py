@@ -7,10 +7,14 @@ from .serializers import (
 )
 from ..models import Post
 
+class PostsPagination(PageNumberPagination):
+    page_size_query_param = 'page_size'
+    page_size = 2
+
 class AllPostsView(ListAPIView):
     serializer_class = PostSerializer
     queryset = Post.objects.filter(state='published').order_by('-date_created')
-    pagination_class = PageNumberPagination
+    pagination_class = PostsPagination
 
 class PostDetailView(GenericAPIView):
     serializer_class = PostSerializer
