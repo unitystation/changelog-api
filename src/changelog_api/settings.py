@@ -227,6 +227,9 @@ CKEDITOR_5_CONFIGS = {
                 'classes': 'true',
                 'styles': 'true',
             }],
+    'mediaEmbed': {
+        'previewsInData': 'true',
+        }
     }
 }
 
