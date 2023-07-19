@@ -1,11 +1,11 @@
+from random import choice
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from django_ckeditor_5.fields import CKEditor5Field
 
-from random import choice
-import re
+from django_ckeditor_5.fields import CKEditor5Field
 
 
 class Post(models.Model):
@@ -50,27 +50,15 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blog:post_detail', args=[self.date_created.year, self.date_created.strftime('%m'), self.date_created.strftime('%d'), self.slug])
 
+
 class Section(models.Model):
-    heading = models.CharField(max_length=200, help_text='Enter a heading for this section. This will displayed as an H2.', blank=True, null=True)
+    heading = models.CharField(
+        max_length=200,
+        help_text='Enter a heading for this section. This will displayed as an H2.',
+        blank=True,
+        null=True)
     body = CKEditor5Field(help_text='Enter the body of this section')
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='sections')
-
-    def save(self, *args, **kwargs):
-        self.body = self.replace_oembed_with_youtube_iframes(self.body)
-        super(Section, self).save(*args, **kwargs)
-
-    def replace_oembed_with_youtube_iframes(self, html: str):
-        """
-        Replaces oembed tags with youtube iframes.
-        """
-        pattern = r'<oembed url="https?://(?:www.youtube.com/watch\?v=|youtu.be/)(?P<id>[\w-]+)"></oembed>'
-
-        def iframe_replacement(match):
-            video_id = match.group('id')
-            return f'<div class="video-wrapper"><iframe src="https://www.youtube.com/embed/{video_id}" title="{self.heading}" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>'
-
-        html = re.sub(pattern, iframe_replacement, html)
-        return html
 
     class Meta:
         ordering = ('pk',)
