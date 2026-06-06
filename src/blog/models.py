@@ -43,9 +43,9 @@ class Post(models.Model):
 
     def get_default_socials_image(self):
         return choice([
-            'https://unitystationfile.b-cdn.net/Branding/US13_OG_image_preview_1.png,'
-            'https://unitystationfile.b-cdn.net/Branding/US13_OG_image_preview_2.png',
-            'https://unitystationfile.b-cdn.net/Branding/US13_OG_image_preview_3.png',])
+            'https://cdn.unitystation.org/Branding/US13_OG_image_preview_1.png,'
+            'https://cdn.unitystation.org/Branding/US13_OG_image_preview_2.png',
+            'https://cdn.unitystation.org/Branding/US13_OG_image_preview_3.png',])
 
     def get_absolute_url(self):
         return reverse('blog:post_detail', args=[self.date_created.year, self.date_created.strftime('%m'), self.date_created.strftime('%d'), self.slug])
