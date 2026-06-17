@@ -17,9 +17,10 @@ class Post(models.Model):
         max_length=12,
         choices=(
             ('no-type', 'No category'),
-            ('weekly', 'Weekly update'),
+            ('weekly', 'Progress update'),
             ('announcement', 'Announcement'),
             ('community', 'Community Highlight'),
+            ('rules', 'Rules Update'),
         ),
         default='no-type',
         help_text='Select the type of this post',
